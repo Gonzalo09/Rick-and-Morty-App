@@ -1,50 +1,21 @@
-import Link from "@mui/material/Link";
+import React, { useEffect } from "react";
+import Header from "./Header";
+import { Box } from "@mui/material";
+import CardPersonajes from "./CardPersonajes";
 
-export default function Personajes(props) {
-  const { personajes } = props;
+const Personajes = (props) => {
+  const { personajes, setPagina, url } = props;
+
+  useEffect(() => {
+    setPagina(1);
+  }, [setPagina]);
 
   return (
-    <div className="characters App App-header">
-      <h1>Personajes</h1>
-      <Link href="/" underline="hover" color="darkseagreen">
-        Volver
-      </Link>
-      <div className="container-characters">
-        {personajes.map((personajes, index) => (
-          <div className="character-container" key={index}>
-            <div>
-              <img src={personajes.image} alt={personajes.name} />
-            </div>
-            <div>
-              <h3>{personajes.name}</h3>
-              <h6>
-                {personajes.status === "Alive" ? (
-                  <>
-                    <span className="alive"></span>
-                    {personajes.status}
-                  </>
-                ) : (
-                  <>
-                    <span className="dead"></span>
-                    {personajes.status}
-                  </>
-                )}
-              </h6>
-              <p>
-                <span className="text-gray">Episodios:</span>
-                <span> {personajes.episode.length}</span>
-              </p>
-              <p>
-                <span className="text-gray">Especie:</span>
-                <span> {personajes.species}</span>
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <Link href="/" underline="hover" color="darkseagreen">
-        Volver
-      </Link>
-    </div>
+    <Box padding={4}>
+      <Header titulo="Personajes" />
+      <CardPersonajes personajes={personajes} setPagina={setPagina} url={url} />
+    </Box>
   );
-}
+};
+
+export default Personajes;

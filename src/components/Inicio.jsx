@@ -1,40 +1,74 @@
-import { theme } from "../muiTheme";
 import Button from "@mui/material/Button";
 import { Box, Grid } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 import RickAndMorty from "../image/rick-and-morty-31013.png";
 
-export default function Inicio() {
+const Inicio = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Grid
+      container
+      spacing={2}
+      paddingBottom={4}
+      sx={{ backgroundColor: "#282c34" }}
+    >
+      <Grid
+        item
+        xs={12}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <img src={RickAndMorty} className="img-home" alt="RickAndMorty" />
-        <ThemeProvider theme={theme}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 6, sm: 8, md: 12 }}
-            >
-              <Grid item xs={2} sm={4} md={4}>
-                <Button href="/personajes" variant="contained" color="success">
-                  Personajes
-                </Button>
-              </Grid>
-              <Grid item xs={2} sm={4} md={4}>
-                <Button href="/ubicaciones" variant="contained" color="success">
-                  Ubicaciones
-                </Button>
-              </Grid>
-              <Grid item xs={2} sm={4} md={4}>
-                <Button href="/episodios" variant="contained" color="success">
-                  Episodios
-                </Button>
-              </Grid>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid
+            container
+            spacing={{ xs: 4, md: 6 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            <Grid item xs={2} sm={4} md={4}>
+              <Button
+                href="/personajes"
+                variant="contained"
+                color="success"
+                sx={{ minWidth: "130px" }}
+              >
+                Personajes
+              </Button>
             </Grid>
-          </Box>
-        </ThemeProvider>
-      </header>
-    </div>
+            <Grid item xs={2} sm={4} md={4}>
+              <Button
+                href="/ubicaciones"
+                variant="contained"
+                color="success"
+                sx={{ minWidth: "130px" }}
+              >
+                Ubicaciones
+              </Button>
+            </Grid>
+            <Grid item xs={2} sm={4} md={4}>
+              <Button
+                href="/episodios"
+                variant="contained"
+                color="success"
+                sx={{ minWidth: "130px" }}
+              >
+                Episodios
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Grid>
+    </Grid>
   );
-}
+};
+
+export default Inicio;

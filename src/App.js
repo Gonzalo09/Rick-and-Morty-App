@@ -1,9 +1,8 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Personajes from "./components/Personajes";
 import Ubicaciones from "./components/Ubicaciones";
 import Episodios from "./components/Episodios";
-import Personajes2 from "./components/Personajes2";
 import Inicio from "./components/Inicio";
 import { Route, Routes } from "react-router-dom";
 
@@ -15,12 +14,13 @@ function App() {
   const [personajes, setPersonajes] = useState([]);
   const [ubicaciones, setUbicaciones] = useState([]);
   const [episodios, setEpisodios] = useState([]);
+  const [pagina, setPagina] = useState(1);
 
   useEffect(() => {
-    fetch(PERSONAJES_API)
+    fetch(`${PERSONAJES_API}/?page=${pagina}`)
       .then((response) => response.json())
       .then((data) => setPersonajes(data.results));
-  }, []);
+  }, [pagina]);
 
   useEffect(() => {
     fetch(UBICACIONES_API)
@@ -39,11 +39,17 @@ function App() {
       <Route path="/" element={<Inicio />} />
       <Route
         path="/personajes"
-        element={<Personajes personajes={personajes} />}
+        element={
+          <Personajes
+            personajes={personajes}
+            setPagina={setPagina}
+            url={PERSONAJES_API}
+          />
+        }
       />
       <Route
         path="/ubicaciones"
-        element={<Personajes2 personajes={personajes} />}
+        element={<Ubicaciones ubicaciones={ubicaciones} />}
       />
       <Route path="/episodios" element={<Episodios episodios={episodios} />} />
     </Routes>

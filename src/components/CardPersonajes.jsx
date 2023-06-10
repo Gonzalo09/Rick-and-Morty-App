@@ -1,13 +1,16 @@
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
+import Paginacion from "./Paginacion";
 
 const CardPersonajes = (props) => {
-  const { personajes } = props;
+  const { personajes, setPagina, url } = props;
+
   return (
     <Grid container spacing={2} paddingBottom={6} paddingTop={2}>
+      <Paginacion setPagina={setPagina} url={url} />
       {personajes.map((personaje, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index} padding={2}>
+        <Grid sm={12} md={6} lg={4} xl={3} key={index} padding={2}>
           <Card
             sx={{
               backgroundColor: "#3c3e44",
@@ -33,11 +36,49 @@ const CardPersonajes = (props) => {
                   <Typography variant="h6">
                     {personaje.status === "Alive" ? (
                       <span style={{ color: "green" }}>
-                        <strong>{personaje.status}</strong>
+                        <span
+                          style={{
+                            height: "0.6rem",
+                            width: "0.6rem",
+                            borderRadius: "50%",
+                            backgroundColor: "green",
+                            display: "inline-block",
+                            marginRight: "0.5rem",
+                            position: "relative",
+                            bottom: "0.1rem",
+                          }}
+                        ></span>
+                        Vivo
+                      </span>
+                    ) : personaje.status === "Dead" ? (
+                      <span style={{ color: "red" }}>
+                        <span
+                          style={{
+                            height: "0.6rem",
+                            width: "0.6rem",
+                            borderRadius: "50%",
+                            backgroundColor: "red",
+                            display: "inline-block",
+                            marginRight: "0.5rem",
+                            bottom: "0.1rem",
+                          }}
+                        ></span>
+                        Muerto
                       </span>
                     ) : (
-                      <span style={{ color: "red" }}>
-                        <strong>{personaje.status}</strong>
+                      <span style={{ color: "gray" }}>
+                        <span
+                          style={{
+                            height: "0.6rem",
+                            width: "0.6rem",
+                            borderRadius: "50%",
+                            backgroundColor: "gray",
+                            display: "inline-block",
+                            marginRight: "0.5rem",
+                            bottom: "0.1rem",
+                          }}
+                        ></span>
+                        Desconocido
                       </span>
                     )}
                   </Typography>

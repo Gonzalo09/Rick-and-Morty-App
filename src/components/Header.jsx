@@ -9,7 +9,7 @@ const Header = (props) => {
         <Typography
           variant="h2"
           sx={{
-            pt: "2rem",
+            pt: "1rem",
             color: "#ffffff",
             fontWeight: "bold",
           }}
