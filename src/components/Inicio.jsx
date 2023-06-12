@@ -18,7 +18,7 @@ const Inicio = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <img src={RickAndMorty} className="img-home" alt="RickAndMorty" />
+        <img src={RickAndMorty} style={{ width: "500px" }} alt="RickAndMorty" />
       </Grid>
       <Grid
         item
@@ -41,7 +41,7 @@ const Inicio = () => {
                 color="success"
                 sx={{ minWidth: "130px" }}
               >
-                Personajes
+                Characters
               </Button>
             </Grid>
             <Grid item xs={2} sm={4} md={4}>
@@ -51,7 +51,7 @@ const Inicio = () => {
                 color="success"
                 sx={{ minWidth: "130px" }}
               >
-                Ubicaciones
+                Locations
               </Button>
             </Grid>
             <Grid item xs={2} sm={4} md={4}>
@@ -61,7 +61,7 @@ const Inicio = () => {
                 color="success"
                 sx={{ minWidth: "130px" }}
               >
-                Episodios
+                Episodes
               </Button>
             </Grid>
           </Grid>

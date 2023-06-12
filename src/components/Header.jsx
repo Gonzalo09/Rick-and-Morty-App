@@ -1,28 +1,51 @@
-import { Grid, Typography, Button } from "@mui/material";
+import { Typography, Button, AppBar, Box, Toolbar } from "@mui/material";
 import React from "react";
+import "../fonts.css"; // Importo el archivo fonts.css
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import imagen from "../image/b6740400-92d4-11ea-8a13-d5f6e0558e9b-PhotoRoom.png-PhotoRoom2.png";
 
 const Header = (props) => {
   const { titulo } = props;
   return (
-    <Grid container align="center">
-      <Grid item xs={12}>
-        <Typography
-          variant="h2"
-          sx={{
-            pt: "1rem",
-            color: "#ffffff",
-            fontWeight: "bold",
-          }}
-        >
-          {titulo}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} sx={{ padding: "2rem" }}>
-        <Button variant="outlined" color="success" size="large" href="/">
-          Volver
-        </Button>
-      </Grid>
-    </Grid>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#282c34",
+          color: "white",
+          boxShadow: "none",
+          paddingTop: "10px",
+        }}
+      >
+        <Toolbar>
+          <img src={imagen} alt="imagen" width="70px" />
+
+          <Typography
+            variant="h2"
+            component="div"
+            align="center"
+            sx={{ flexGrow: 1, fontFamily: "Get Schwifty" }}
+          >
+            {titulo}
+          </Typography>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            size="large"
+            href="/"
+            sx={{
+              color: "white",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#3c3e44",
+                borderRadius: "10px",
+              },
+            }}
+          >
+            Back
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 

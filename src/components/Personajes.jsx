@@ -11,8 +11,8 @@ const Personajes = (props) => {
   }, [setPagina]);
 
   return (
-    <Box padding={4}>
-      <Header titulo="Personajes" />
+    <Box>
+      <Header titulo="Characters" />
       <CardPersonajes personajes={personajes} setPagina={setPagina} url={url} />
     </Box>
   );
