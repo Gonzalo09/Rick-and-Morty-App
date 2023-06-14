@@ -16,12 +16,11 @@ function App() {
   const [ubicaciones, setUbicaciones] = useState([]);
   const [episodios, setEpisodios] = useState([]);
   const [pagina, setPagina] = useState(1);
+  const [info, setInfo] = useState({});
+  const [url, setUrl] = useState(PERSONAJES_API);
 
-  useEffect(() => {
-    fetch(`${PERSONAJES_API}/?page=${pagina}`)
-      .then((response) => response.json())
-      .then((data) => setPersonajes(data.results));
-  }, [pagina]);
+  console.log(url, "url");
+  console.log(info, "info");
 
   useEffect(() => {
     fetch(UBICACIONES_API)
@@ -37,17 +36,23 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Inicio />} />
+      <Route path="/" element={<Inicio pagina={pagina} />} />
       <Route
-        path="/personajes"
+        path="/personajes/pagina/:id"
         element={
           <Personajes
             personajes={personajes}
+            pagina={pagina}
             setPagina={setPagina}
+            setPersonajes={setPersonajes}
+            setInfo={setInfo}
             url={PERSONAJES_API}
+            info={info}
+            setUrl={setUrl}
           />
         }
       />
+
       <Route
         path="/ubicaciones"
         element={<Ubicaciones ubicaciones={ubicaciones} />}

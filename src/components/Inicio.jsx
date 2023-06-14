@@ -1,8 +1,10 @@
 import Button from "@mui/material/Button";
 import { Box, Grid } from "@mui/material";
 import RickAndMorty from "../image/rick-and-morty-31013.png";
+import { Link } from "react-router-dom";
 
-const Inicio = () => {
+const Inicio = (props) => {
+  const { pagina } = props;
   return (
     <Grid
       container
@@ -36,7 +38,8 @@ const Inicio = () => {
           >
             <Grid item xs={2} sm={4} md={4}>
               <Button
-                href="/personajes"
+                component={Link}
+                to={`/personajes/pagina/${pagina}`}
                 variant="contained"
                 color="success"
                 sx={{ minWidth: "130px" }}

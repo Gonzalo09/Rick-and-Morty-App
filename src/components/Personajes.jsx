@@ -1,19 +1,41 @@
-import React, { useEffect } from "react";
 import Header from "./Header";
 import { Box } from "@mui/material";
 import CardPersonajes from "./CardPersonajes";
+import Paginacion from "./Paginacion";
+import { useEffect } from "react";
 
 const Personajes = (props) => {
-  const { personajes, setPagina, url } = props;
+  const {
+    personajes,
+    setPagina,
+    url,
+    info,
+    setUrl,
+    pagina,
+    setPersonajes,
+    setInfo,
+  } = props;
+
+  const paginaUrl = () => {
+    const url = window.location.href;
+    const pagina = url.split("/")[5];
+    return pagina;
+  };
 
   useEffect(() => {
-    setPagina(1);
-  }, [setPagina]);
+    fetch(`https://rickandmortyapi.com/api/character?page=${paginaUrl()}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPersonajes(data.results);
+        setInfo(data.info);
+      });
+  }, [pagina, url, setPersonajes, setInfo]);
 
   return (
     <Box>
       <Header titulo="Characters" />
-      <CardPersonajes personajes={personajes} setPagina={setPagina} url={url} />
+      <Paginacion info={info} setUrl={setUrl} setPagina={setPagina} />
+      <CardPersonajes personajes={personajes} />
     </Box>
   );
 };

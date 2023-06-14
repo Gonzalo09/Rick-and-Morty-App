@@ -6,11 +6,25 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React from "react";
-import Paginacion from "./Paginacion";
+import React, { useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const CardPersonajes = (props) => {
-  const { personajes, setPagina, url } = props;
+  const { personajes } = props;
+  const location = useLocation();
+  const scrollRef = useRef({});
+
+  useEffect(() => {
+    if (
+      location.state &&
+      location.state.scrollPosition &&
+      scrollRef.current &&
+      scrollRef.current.scrollTop !== undefined
+    ) {
+      const { scrollPosition } = location.state;
+      scrollRef.current.scrollTop = scrollPosition;
+    }
+  }, [location]);
 
   const handleName = (name) => {
     return name.length > 20 ? (
@@ -21,7 +35,7 @@ const CardPersonajes = (props) => {
   };
 
   return (
-    <Grid container spacing={2} padding={4}>
+    <Grid container spacing={2} padding={4} ref={scrollRef}>
       {personajes.map((personaje, index) => (
         <Grid sm={12} md={6} lg={4} xl={3} item key={index} padding={2}>
           <Card
@@ -119,7 +133,13 @@ const CardPersonajes = (props) => {
                           transform: "scale(1)",
                         },
                       }}
-                      href={`/personaje/${personaje.id}`}
+                      component={Link}
+                      to={{
+                        pathname: `/personaje/${personaje.id}`,
+                        state: {
+                          scrollPosition: scrollRef.current.scrollTop,
+                        },
+                      }}
                     >
                       <Typography variant="overline">
                         More information
@@ -132,7 +152,6 @@ const CardPersonajes = (props) => {
           </Card>
         </Grid>
       ))}
-      <Paginacion setPagina={setPagina} url={url} />
     </Grid>
   );
 };
