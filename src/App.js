@@ -54,7 +54,7 @@ function App() {
       />
       <Route path="/episodios" element={<Episodios episodios={episodios} />} />
       <Route
-        path="/personajes/:id"
+        path="/personaje/:id"
         element={<Personaje url={PERSONAJES_API} />}
       />
     </Routes>

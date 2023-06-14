@@ -13,11 +13,11 @@ const CardPersonajes = (props) => {
   const { personajes, setPagina, url } = props;
 
   const handleName = (name) => {
-    if (name.length > 20) {
-      return "h6";
-    } else {
-      return "h5";
-    }
+    return name.length > 20 ? (
+      <Typography variant="h6">{name}</Typography>
+    ) : (
+      <Typography variant="h5">{name}</Typography>
+    );
   };
 
   return (
@@ -60,9 +60,7 @@ const CardPersonajes = (props) => {
               >
                 <Grid item>
                   <CardContent>
-                    <Typography variant={handleName(personaje.name)}>
-                      <strong>{personaje.name}</strong>
-                    </Typography>
+                    <strong>{handleName(personaje.name)}</strong>
                   </CardContent>
                 </Grid>
                 <Grid item>
@@ -121,7 +119,7 @@ const CardPersonajes = (props) => {
                           transform: "scale(1)",
                         },
                       }}
-                      href={`/personajes/${personaje.id}`}
+                      href={`/personaje/${personaje.id}`}
                     >
                       <Typography variant="overline">
                         More information
