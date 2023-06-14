@@ -18,16 +18,6 @@ const Header = (props) => {
         }}
       >
         <Toolbar>
-          <img src={imagen} alt="imagen" width="70px" />
-
-          <Typography
-            variant="h2"
-            component="div"
-            align="center"
-            sx={{ flexGrow: 1, fontFamily: "Get Schwifty" }}
-          >
-            {titulo}
-          </Typography>
           <Button
             startIcon={<ArrowBackIcon />}
             size="large"
@@ -43,6 +33,16 @@ const Header = (props) => {
           >
             Back
           </Button>
+          <Typography
+            variant="h2"
+            component="div"
+            align="center"
+            sx={{ flexGrow: 1, fontFamily: "Get Schwifty" }}
+          >
+            {titulo}
+          </Typography>
+
+          <img src={imagen} alt="imagen" width="70px" />
         </Toolbar>
       </AppBar>
     </Box>
