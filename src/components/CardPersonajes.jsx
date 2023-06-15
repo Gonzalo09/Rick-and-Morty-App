@@ -1,3 +1,5 @@
+import React, { useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Button,
   Card,
@@ -6,8 +8,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const CardPersonajes = (props) => {
   const { personajes } = props;
@@ -27,23 +27,93 @@ const CardPersonajes = (props) => {
   }, [location]);
 
   const handleName = (name) => {
-    return name.length > 20 ? (
-      <Typography variant="h6">{name}</Typography>
+    const fontSize = name.length > 15 ? "0.9rem" : "1.3rem";
+    return (
+      <Typography
+        variant="h5"
+        sx={{ "@media (max-width: 450px)": { fontSize } }}
+      >
+        {name}
+      </Typography>
+    );
+  };
+
+  const handleSpecies = (species) => {
+    return (species.length > 7 && species.indexOf(" ") === -1) ||
+      species.length > 10 ? (
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          "@media (max-width: 450px)": {
+            fontSize: "0.9rem",
+          },
+        }}
+      >
+        Species:&nbsp;
+        <Typography
+          variant="subtitle1"
+          display="inline"
+          sx={{
+            "@media (max-width: 450px)": {
+              fontSize: "0.7rem",
+            },
+          }}
+        >
+          {species}
+        </Typography>
+      </Typography>
     ) : (
-      <Typography variant="h5">{name}</Typography>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          "@media (max-width: 450px)": {
+            fontSize: "1.1rem",
+          },
+        }}
+      >
+        Species:&nbsp;
+        <Typography
+          variant="subtitle1"
+          display="inline"
+          sx={{
+            "@media (max-width: 450px)": {
+              fontSize: "0.9rem",
+            },
+          }}
+        >
+          {species}
+        </Typography>
+      </Typography>
     );
   };
 
   return (
-    <Grid container spacing={2} padding={4} ref={scrollRef}>
+    <Grid
+      container
+      spacing={4}
+      paddingLeft={4}
+      paddingRight={4}
+      paddingTop={2}
+      paddingBottom={5}
+      ref={scrollRef}
+      sx={{
+        "@media (max-width: 450px)": {
+          padding: 1,
+          paddingBottom: 5,
+        },
+      }}
+    >
       {personajes.map((personaje, index) => (
-        <Grid sm={12} md={6} lg={4} xl={3} item key={index} padding={2}>
+        <Grid sm={12} md={6} lg={4} xs={12} xl={3} item key={index}>
           <Card
             sx={{
               backgroundColor: "#3c3e44",
               color: "white",
               borderRadius: "10px",
-              height: 290,
+              maxHeight: 290,
+              height: "100%",
               transition: "transform 0.5s ease",
               "&:hover": {
                 transform: "scale(1.1)",
@@ -79,13 +149,25 @@ const CardPersonajes = (props) => {
                 </Grid>
                 <Grid item>
                   <CardContent>
-                    <Typography variant="h6">
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        "@media (max-width: 450px)": {
+                          fontSize: "1.1rem",
+                        },
+                      }}
+                    >
                       Status:&nbsp;
                       {personaje.status === "Alive" ? (
                         <Typography
                           variant="subtitle1"
                           display="inline"
-                          sx={{ color: "#00ff00" }}
+                          sx={{
+                            color: "#00ff00",
+                            "@media (max-width: 450px)": {
+                              fontSize: "0.9rem",
+                            },
+                          }}
                         >
                           {personaje.status}
                         </Typography>
@@ -93,7 +175,12 @@ const CardPersonajes = (props) => {
                         <Typography
                           variant="subtitle1"
                           display="inline"
-                          sx={{ color: "#ff0000" }}
+                          sx={{
+                            color: "#ff0000",
+                            "@media (max-width: 450px)": {
+                              fontSize: "0.9rem",
+                            },
+                          }}
                         >
                           {personaje.status}
                         </Typography>
@@ -101,18 +188,18 @@ const CardPersonajes = (props) => {
                         <Typography
                           variant="subtitle1"
                           display="inline"
-                          sx={{ color: "#ff8000" }}
+                          sx={{
+                            color: "#ff8000",
+                            "@media (max-width: 450px)": {
+                              fontSize: "0.9rem",
+                            },
+                          }}
                         >
                           {personaje.status}
                         </Typography>
                       )}
                     </Typography>
-                    <Typography variant="h6" component="div">
-                      Species:&nbsp;
-                      <Typography variant="subtitle1" display="inline">
-                        {personaje.species}
-                      </Typography>
-                    </Typography>
+                    {handleSpecies(personaje.species)}
                   </CardContent>
                 </Grid>
                 <Grid item>
@@ -141,7 +228,14 @@ const CardPersonajes = (props) => {
                         },
                       }}
                     >
-                      <Typography variant="overline">
+                      <Typography
+                        variant="overline"
+                        sx={{
+                          "@media (max-width: 450px)": {
+                            fontSize: "0.7rem",
+                          },
+                        }}
+                      >
                         More information
                       </Typography>
                     </Button>

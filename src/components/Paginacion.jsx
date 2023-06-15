@@ -1,5 +1,8 @@
-import { Grid, Pagination, Stack } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
 const Paginacion = (props) => {
   const { info, setUrl, setPagina } = props;
   const navigate = useNavigate();
@@ -13,37 +16,80 @@ const Paginacion = (props) => {
     }
   };
 
-  const handlePaginaChange = (event, value) => {
-    setUrl(`https://rickandmortyapi.com/api/character?page=${value}`);
-    setPagina(() => value);
-    navigate(`/personajes/pagina/${value}`);
-  };
-
   return (
-    <Grid container item xs={12}>
-      <Grid
-        item
-        xs={12}
-        display="flex"
-        justifyContent="center"
-        sx={{ paddingBottom: 1, paddingTop: 5 }}
-      >
-        <Stack spacing={2}>
-          <Pagination
-            page={paginaActual()}
-            count={info.pages}
-            color="success"
-            shape="rounded"
-            size="small"
-            variant="outlined"
-            onChange={handlePaginaChange}
+    <Grid
+      container
+      spacing={2}
+      paddingTop={2}
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid item xs={4} display="flex" justifyContent="center">
+        <IconButton
+          onClick={() => {
+            if (info.prev !== null) {
+              setUrl(info.prev);
+              setPagina(() => paginaActual() - 1);
+              navigate(`/personajes/pagina/${paginaActual() - 1}`);
+            }
+          }}
+        >
+          <NavigateBeforeIcon
+            sx={{
+              fontSize: "3rem",
+              "@media (max-width: 550px)": {
+                fontSize: "2rem",
+              },
+              "@media (max-width: 390px)": {
+                fontSize: "1.5rem",
+              },
+            }}
           />
-        </Stack>
+        </IconButton>
       </Grid>
-      <Grid item xs={12} display="flex" justifyContent="center">
-        <p>
+      <Grid item xs={4} display="flex" justifyContent="center">
+        <Typography
+          variant="overline"
+          component="div"
+          sx={{
+            fontSize: "1.5rem",
+            color: "rgba(0, 0, 0, 0.54)",
+            "@media (max-width: 800px)": {
+              fontSize: "1rem",
+            },
+            "@media (max-width: 550px)": {
+              fontSize: "0.8rem",
+            },
+            "@media (max-width: 450px)": {
+              fontSize: "0.7rem",
+            },
+          }}
+        >
           Page {paginaActual()} of {info.pages}
-        </p>
+        </Typography>
+      </Grid>
+      <Grid item xs={4} display="flex" justifyContent="center">
+        <IconButton
+          onClick={() => {
+            if (info.next !== null) {
+              setUrl(info.next);
+              setPagina(() => paginaActual() + 1);
+              navigate(`/personajes/pagina/${paginaActual() + 1}`);
+            }
+          }}
+        >
+          <NavigateNextIcon
+            sx={{
+              fontSize: "3rem",
+              "@media (max-width: 550px)": {
+                fontSize: "2rem",
+              },
+              "@media (max-width: 390px)": {
+                fontSize: "1.5rem",
+              },
+            }}
+          />
+        </IconButton>
       </Grid>
     </Grid>
   );

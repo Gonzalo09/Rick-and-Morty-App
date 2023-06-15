@@ -1,8 +1,8 @@
 import { Typography, Button, AppBar, Box, Toolbar } from "@mui/material";
 import React from "react";
-import "../fonts.css"; // Importo el archivo fonts.css
+import "../fonts.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import imagen from "../image/b6740400-92d4-11ea-8a13-d5f6e0558e9b-PhotoRoom.png-PhotoRoom2.png";
+import imagen from "../image/RickAndMortyHeader.png";
 
 const Header = (props) => {
   const { titulo } = props;
@@ -17,17 +17,27 @@ const Header = (props) => {
           paddingTop: "10px",
         }}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Button
             startIcon={<ArrowBackIcon />}
             size="large"
             href="/"
             sx={{
+              width: "120px",
               color: "white",
               borderRadius: "10px",
               "&:hover": {
                 backgroundColor: "#3c3e44",
                 borderRadius: "10px",
+              },
+              "@media (max-width: 600px)": {
+                width: "80px",
               },
             }}
           >
@@ -37,12 +47,35 @@ const Header = (props) => {
             variant="h2"
             component="div"
             align="center"
-            sx={{ flexGrow: 1, fontFamily: "Get Schwifty" }}
+            sx={{
+              flexGrow: 1,
+              fontFamily: "Get Schwifty",
+
+              "@media (max-width: 1200px)": {
+                fontSize: "4rem",
+              },
+              "@media (max-width: 900px)": {
+                fontSize: "3rem",
+              },
+              "@media (max-width: 600px)": {
+                fontSize: "1.5rem",
+              },
+            }}
           >
             {titulo}
           </Typography>
-
-          <img src={imagen} alt="imagen" width="70px" />
+          <Box
+            component="img"
+            src={imagen}
+            alt="imagen"
+            width="120px"
+            height="auto"
+            sx={{
+              "@media (max-width: 600px)": {
+                width: "80px",
+              },
+            }}
+          />
         </Toolbar>
       </AppBar>
     </Box>

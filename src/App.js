@@ -17,10 +17,8 @@ function App() {
   const [episodios, setEpisodios] = useState([]);
   const [pagina, setPagina] = useState(1);
   const [info, setInfo] = useState({});
+  // eslint-disable-next-line no-unused-vars
   const [url, setUrl] = useState(PERSONAJES_API);
-
-  console.log(url, "url");
-  console.log(info, "info");
 
   useEffect(() => {
     fetch(UBICACIONES_API)

@@ -20,7 +20,11 @@ const Inicio = (props) => {
         justifyContent="center"
         alignItems="center"
       >
-        <img src={RickAndMorty} style={{ width: "500px" }} alt="RickAndMorty" />
+        <img
+          src={RickAndMorty}
+          style={{ width: "100%", maxWidth: "500px" }}
+          alt="RickAndMorty"
+        />
       </Grid>
       <Grid
         item
@@ -31,38 +35,34 @@ const Inicio = (props) => {
         alignItems="center"
       >
         <Box sx={{ flexGrow: 1 }}>
-          <Grid
-            container
-            spacing={{ xs: 4, md: 6 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-          >
-            <Grid item xs={2} sm={4} md={4}>
+          <Grid container spacing={{ xs: 2, sm: 4 }}>
+            <Grid item xs={12} sm={4} display="flex" justifyContent="center">
               <Button
                 component={Link}
                 to={`/personajes/pagina/${pagina}`}
                 variant="contained"
                 color="success"
-                sx={{ minWidth: "130px" }}
+                sx={{ minWidth: "130px", width: "90%" }}
               >
                 Characters
               </Button>
             </Grid>
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={12} sm={4} display="flex" justifyContent="center">
               <Button
                 href="/ubicaciones"
                 variant="contained"
                 color="success"
-                sx={{ minWidth: "130px" }}
+                sx={{ minWidth: "130px", width: "90%" }}
               >
                 Locations
               </Button>
             </Grid>
-            <Grid item xs={2} sm={4} md={4}>
+            <Grid item xs={12} sm={4} display="flex" justifyContent="center">
               <Button
                 href="/episodios"
                 variant="contained"
                 color="success"
-                sx={{ minWidth: "130px" }}
+                sx={{ minWidth: "130px", width: "90%" }}
               >
                 Episodes
               </Button>
