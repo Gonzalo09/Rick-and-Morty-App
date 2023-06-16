@@ -1,13 +1,19 @@
 import {
+  Accordion,
+  AccordionSummary,
   CardMedia,
   CircularProgress,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useParams } from "react-router-dom";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Personaje = (props) => {
   const { url } = props;
@@ -56,19 +62,21 @@ const Personaje = (props) => {
         <Grid item xs={6} display="flex" justifyContent="flex-start">
           <Typography variant="h5">Status: {personaje.status}</Typography>
         </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
+        <Grid item xs={6} display="flex" justifyContent="flex-end">
           <Typography variant="h5">Species: {personaje.species}</Typography>
         </Grid>
         <Grid item xs={6} display="flex" justifyContent="flex-start">
-          <Typography variant="h5">Type: {personaje.type}</Typography>
+          <Typography variant="h5">
+            Type: {personaje.type === "" ? "unknown" : personaje.type}
+          </Typography>
         </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
+        <Grid item xs={6} display="flex" justifyContent="flex-end">
           <Typography variant="h5">Gender: {personaje.gender}</Typography>
         </Grid>
         <Grid item xs={6} display="flex" justifyContent="flex-start">
           <Typography variant="h5">Origin: {personaje.origin?.name}</Typography>
         </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
+        <Grid item xs={6} display="flex" justifyContent="flex-end">
           <Typography variant="h5">
             Location: {personaje.location?.name}
           </Typography>
@@ -77,6 +85,52 @@ const Personaje = (props) => {
           <Typography variant="h5">
             Episodes: {personaje.episode?.length}
           </Typography>
+        </Grid>
+        <Grid item xs={6} display="flex" justifyContent="flex-end">
+          <Accordion
+            sx={{
+              width: "50%",
+              backgroundColor: "#3c3e44",
+              color: "white",
+              borderRadius: "10px",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              sx={{ boxShadow: "0px 0px 30px 0px rgba(0,0,0,0.25)" }}
+            >
+              <Typography>Select an episode</Typography>
+            </AccordionSummary>
+            <List
+              sx={{
+                width: "100%",
+                maxHeight: "150px",
+                overflow: "auto",
+                "&::-webkit-scrollbar": {
+                  width: "0.4em",
+                },
+              }}
+            >
+              {personaje.episode?.map((episodio) => (
+                <ListItem
+                  key={episodio.split("/").pop()}
+                  onClick={() => {
+                    window.open(episodio, "_blank");
+                  }}
+                >
+                  <ListItemText
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": {
+                        color: "green",
+                      },
+                    }}
+                    primary={`Episode ${episodio.split("/").pop()}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Accordion>
         </Grid>
       </>
     );
@@ -98,7 +152,7 @@ const Personaje = (props) => {
           color: "white",
           borderRadius: "10px",
           height: "95%",
-          width: "70%",
+          width: "60%",
           boxShadow: "0px 0px 30px 0px rgba(0,0,0,0.75)",
         }}
       >
@@ -116,7 +170,7 @@ const Personaje = (props) => {
             height: "150px",
             width: "150px",
             margin: "auto",
-            marginTop: "-65px",
+            marginTop: "-75px",
             borderRadius: "50%",
             outline: "none",
             transition: "transform 0.5s ease",

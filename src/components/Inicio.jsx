@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { Box, Grid } from "@mui/material";
-import RickAndMorty from "../image/rick-and-morty-31013.png";
+import RickAndMorty from "../image/RickAndMortyInicio.png";
 import { Link } from "react-router-dom";
 
 const Inicio = (props) => {
