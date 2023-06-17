@@ -39,52 +39,55 @@ const CardPersonajes = (props) => {
   };
 
   const handleSpecies = (species) => {
-    return (species.length > 7 && species.indexOf(" ") === -1) ||
-      species.length > 10 ? (
+    const isLongSpecies =
+      (species.length > 7 && species.indexOf(" ") === -1) ||
+      species.length > 10;
+
+    return (
       <Typography
         variant="h6"
         component="div"
         sx={{
           "@media (max-width: 450px)": {
-            fontSize: "0.9rem",
+            fontSize: isLongSpecies ? "0.9rem" : "1.1rem",
           },
         }}
       >
         Species:&nbsp;
         <Typography
-          variant="subtitle1"
+          variant={isLongSpecies ? "subtitle2" : "subtitle1"}
           display="inline"
           sx={{
             "@media (max-width: 450px)": {
-              fontSize: "0.7rem",
+              fontSize: isLongSpecies ? "0.7rem" : "0.9rem",
             },
           }}
         >
           {species}
         </Typography>
       </Typography>
-    ) : (
+    );
+  };
+
+  const getStatusTypography = (status) => {
+    const statusColors = {
+      Alive: "#00ff00",
+      Dead: "#ff0000",
+      unknown: "#ff8000",
+    };
+
+    return (
       <Typography
-        variant="h6"
-        component="div"
+        variant="subtitle1"
+        display="inline"
         sx={{
+          color: statusColors[status],
           "@media (max-width: 450px)": {
-            fontSize: "1.1rem",
+            fontSize: "0.9rem",
           },
         }}
       >
-        Species:&nbsp;
-        <Typography
-          variant="subtitle1"
-          display="inline"
-          sx={{
-            "@media (max-width: 450px)": {
-              fontSize: "0.9rem",
-            },
-          }}
-        >
-          {species}
-        </Typography>
+        {status}
       </Typography>
     );
   };
@@ -158,46 +161,7 @@ const CardPersonajes = (props) => {
                       }}
                     >
                       Status:&nbsp;
-                      {personaje.status === "Alive" ? (
-                        <Typography
-                          variant="subtitle1"
-                          display="inline"
-                          sx={{
-                            color: "#00ff00",
-                            "@media (max-width: 450px)": {
-                              fontSize: "0.9rem",
-                            },
-                          }}
-                        >
-                          {personaje.status}
-                        </Typography>
-                      ) : personaje.status === "Dead" ? (
-                        <Typography
-                          variant="subtitle1"
-                          display="inline"
-                          sx={{
-                            color: "#ff0000",
-                            "@media (max-width: 450px)": {
-                              fontSize: "0.9rem",
-                            },
-                          }}
-                        >
-                          {personaje.status}
-                        </Typography>
-                      ) : (
-                        <Typography
-                          variant="subtitle1"
-                          display="inline"
-                          sx={{
-                            color: "#ff8000",
-                            "@media (max-width: 450px)": {
-                              fontSize: "0.9rem",
-                            },
-                          }}
-                        >
-                          {personaje.status}
-                        </Typography>
-                      )}
+                      {getStatusTypography(personaje.status)}
                     </Typography>
                     {handleSpecies(personaje.species)}
                   </CardContent>

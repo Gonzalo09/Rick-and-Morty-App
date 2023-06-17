@@ -7,23 +7,19 @@ import { useEffect } from "react";
 const Personajes = (props) => {
   const {
     personajes,
-    setPagina,
-    url,
-    info,
-    setUrl,
-    pagina,
     setPersonajes,
+    pagina,
+    setPagina,
+    info,
     setInfo,
+    url,
+    setUrl,
   } = props;
 
-  const paginaUrl = () => {
-    const url = window.location.href;
-    const pagina = url.split("/")[5];
-    return pagina;
-  };
-
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character?page=${paginaUrl()}`)
+    const paginaUrl = window.location.href.split("/")[5];
+
+    fetch(`https://rickandmortyapi.com/api/character?page=${paginaUrl}`)
       .then((response) => response.json())
       .then((data) => {
         setPersonajes(data.results);

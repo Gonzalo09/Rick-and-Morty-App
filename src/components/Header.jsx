@@ -3,6 +3,7 @@ import React from "react";
 import "../fonts.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import imagen from "../image/RickAndMortyHeader.png";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   const { titulo } = props;
@@ -27,7 +28,8 @@ const Header = (props) => {
           <Button
             startIcon={<ArrowBackIcon />}
             size="large"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               width: "120px",
               color: "white",
