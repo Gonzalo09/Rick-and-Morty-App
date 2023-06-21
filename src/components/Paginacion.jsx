@@ -2,16 +2,13 @@ import { Grid, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import LastPageIcon from "@mui/icons-material/LastPage";
 
 const Paginacion = (props) => {
   const { info, setUrl, setPagina } = props;
   const navigate = useNavigate();
-  const paginaActual =
-    info.prev === null
-      ? 1
-      : info.next === null
-      ? info.pages
-      : parseInt(info.next?.split("=")[1]) - 1;
+  const paginaActual = info?.prev ? parseInt(info.prev.split("=")[1]) + 1 : 1;
 
   const handleFirstPage = () => {
     setUrl("https://rickandmortyapi.com/api/character?page=1");
@@ -26,7 +23,7 @@ const Paginacion = (props) => {
   };
 
   const handlePreviousPage = () => {
-    if (info.prev !== null) {
+    if (info?.prev) {
       setUrl(info.prev);
       setPagina(paginaActual - 1);
       navigate(`/personajes/pagina/${paginaActual - 1}`);
@@ -34,7 +31,7 @@ const Paginacion = (props) => {
   };
 
   const handleNextPage = () => {
-    if (info.next !== null) {
+    if (info?.next) {
       setUrl(info.next);
       setPagina(paginaActual + 1);
       navigate(`/personajes/pagina/${paginaActual + 1}`);
@@ -50,8 +47,12 @@ const Paginacion = (props) => {
       alignItems="center"
     >
       <Grid item xs={4} display="flex" justifyContent="center">
-        <IconButton onClick={handleFirstPage}>
-          <NavigateBeforeIcon
+        <IconButton
+          onClick={handleFirstPage}
+          disabled={!info?.prev}
+          title="First page"
+        >
+          <FirstPageIcon
             sx={{
               fontSize: "3rem",
               "@media (max-width: 550px)": {
@@ -63,7 +64,11 @@ const Paginacion = (props) => {
             }}
           />
         </IconButton>
-        <IconButton onClick={handlePreviousPage}>
+        <IconButton
+          onClick={handlePreviousPage}
+          disabled={!info?.prev}
+          title="Previous page"
+        >
           <NavigateBeforeIcon
             sx={{
               fontSize: "3rem",
@@ -95,11 +100,15 @@ const Paginacion = (props) => {
             },
           }}
         >
-          Page {paginaActual} of {info.pages}
+          Page {paginaActual} of {info?.pages}
         </Typography>
       </Grid>
       <Grid item xs={4} display="flex" justifyContent="center">
-        <IconButton onClick={handleNextPage}>
+        <IconButton
+          onClick={handleNextPage}
+          disabled={!info?.next}
+          title="Next page"
+        >
           <NavigateNextIcon
             sx={{
               fontSize: "3rem",
@@ -112,8 +121,12 @@ const Paginacion = (props) => {
             }}
           />
         </IconButton>
-        <IconButton onClick={handleLastPage}>
-          <NavigateNextIcon
+        <IconButton
+          onClick={handleLastPage}
+          disabled={!info?.next}
+          title="Last page"
+        >
+          <LastPageIcon
             sx={{
               fontSize: "3rem",
               "@media (max-width: 550px)": {

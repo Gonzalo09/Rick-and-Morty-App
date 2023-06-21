@@ -7,6 +7,23 @@ import { Link } from "react-router-dom";
 
 const Header = (props) => {
   const { titulo } = props;
+
+  const handleBack = () => {
+    const ruta = window.location.pathname;
+    if (ruta.includes("/personajes/pagina/")) {
+      window.location.href = "/";
+    }
+    if (ruta.includes("/personaje/")) {
+      window.history.back();
+    }
+    if (ruta.includes("/ubicaciones")) {
+      window.history.back();
+    }
+    if (ruta.includes("/episodios")) {
+      window.history.back();
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -29,7 +46,7 @@ const Header = (props) => {
             startIcon={<ArrowBackIcon />}
             size="large"
             component={Link}
-            to="/"
+            onClick={handleBack}
             sx={{
               width: "120px",
               color: "white",

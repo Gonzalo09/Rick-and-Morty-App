@@ -1,4 +1,10 @@
-import { Box, IconButton, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  CircularProgress,
+  Typography,
+  Link,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -43,11 +49,12 @@ const Personaje2 = (props) => {
         <CircularProgress color="success" />
       ) : (
         <Box
-          width="70%"
+          width="80%"
           margin="auto"
-          marginTop={10}
+          marginTop={12}
           marginBottom={10}
           paddingBottom={5}
+          color="white"
           sx={{
             backgroundColor: "#3c3e44",
             borderRadius: "15px",
@@ -75,14 +82,19 @@ const Personaje2 = (props) => {
               },
             }}
           />
-          <Typography variant="h3" textAlign="center" marginTop={2}>
+          <Typography
+            variant="h2"
+            textAlign="center"
+            marginTop={3}
+            marginBottom={3}
+          >
             {personaje.name}
           </Typography>
           <Box
             display="flex"
             justifyContent="space-between"
-            width="80%"
-            marginTop={2}
+            width="90%"
+            marginTop={4}
           >
             <Typography variant="h5">Status: {personaje.status}</Typography>
             <Typography variant="h5">Specie: {personaje.species}</Typography>
@@ -90,8 +102,8 @@ const Personaje2 = (props) => {
           <Box
             display="flex"
             justifyContent="space-between"
-            width="80%"
-            marginTop={2}
+            width="90%"
+            marginTop={4}
           >
             <Typography variant="h5">
               Type: {personaje.type === "" ? "unknown" : personaje.type}
@@ -101,19 +113,61 @@ const Personaje2 = (props) => {
           <Box
             display="flex"
             justifyContent="space-between"
-            width="80%"
-            marginTop={2}
+            width="90%"
+            marginTop={4}
           >
             <Typography variant="h5">
-              Origin: {personaje.origin.name}
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href =
+                    "https://rickandmortyapi.com/api/location/?name=" +
+                    personaje.origin.name;
+                }}
+              >
+                Origin: {personaje.origin.name}
+              </Link>
             </Typography>
             <Typography variant="h5">
-              Location: {personaje.location.name}
+              N° of episodes: {personaje.episode?.length}
             </Typography>
           </Box>
-          <Typography variant="h5" width="80%" marginTop={2}>
-            N° of episodes: {personaje.episode?.length}
-          </Typography>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width="90%"
+            marginTop={4}
+            marginBottom={2}
+          >
+            <Typography variant="h5">
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href =
+                    "https://rickandmortyapi.com/api/location/?name=" +
+                    personaje.location.name;
+                }}
+              >
+                Location: {personaje.location.name}
+              </Link>
+            </Typography>
+            <Typography variant="h5">
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href = "/episodios";
+                }}
+              >
+                Episodes
+              </Link>
+            </Typography>
+          </Box>
         </Box>
       )}
     </Box>
