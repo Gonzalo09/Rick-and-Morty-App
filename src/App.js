@@ -5,7 +5,6 @@ import Episodios from "./components/Episodios";
 import Inicio from "./components/Inicio";
 import { Route, Routes } from "react-router-dom";
 import Personaje from "./components/Personaje";
-import Personaje2 from "./components/Personaje2";
 
 const PERSONAJES_API = "https://rickandmortyapi.com/api/character";
 const UBICACIONES_API = "https://rickandmortyapi.com/api/location";
@@ -58,7 +57,7 @@ function App() {
       <Route path="/episodios" element={<Episodios episodios={episodios} />} />
       <Route
         path="/personaje/:id"
-        element={<Personaje2 url={PERSONAJES_API} />}
+        element={<Personaje url={PERSONAJES_API} />}
       />
     </Routes>
   );

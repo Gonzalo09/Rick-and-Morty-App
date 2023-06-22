@@ -1,21 +1,15 @@
 import {
-  Accordion,
-  AccordionSummary,
-  CardMedia,
-  CircularProgress,
-  Grid,
+  Box,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
+  CircularProgress,
   Typography,
+  Link,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useParams } from "react-router-dom";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const Personaje = (props) => {
+const Personaje2 = (props) => {
   const { url } = props;
   const { id } = useParams();
   const [personaje, setPersonaje] = useState({});
@@ -43,165 +37,141 @@ const Personaje = (props) => {
     window.history.back();
   };
 
-  const PersonajeInfo = () => {
-    return (
-      <>
-        <Grid item xs={12} display="flex" justifyContent="center">
-          <Typography
-            variant="overline"
+  return (
+    <Box>
+      <IconButton
+        sx={{ position: "absolute", top: "10px", left: "10px" }}
+        onClick={handleGoBack}
+      >
+        <ArrowBackIcon sx={{ color: "white", fontSize: "50px" }} />
+      </IconButton>
+      {loading ? (
+        <CircularProgress color="success" />
+      ) : (
+        <Box
+          width="80%"
+          margin="auto"
+          marginTop={12}
+          marginBottom={10}
+          paddingBottom={5}
+          color="white"
+          sx={{
+            backgroundColor: "#3c3e44",
+            borderRadius: "15px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            component="img"
+            src={personaje.image}
+            alt={personaje.name}
             sx={{
-              fontFamily: "Roboto",
-              fontSize: "30px",
-              fontWeight: "bold",
-              marginTop: "-30px",
+              height: "150px",
+              width: "150px",
+              borderRadius: "50%",
+              marginTop: "-75px",
+              outline: "none",
+              transition: "transform 0.5s ease",
+              "&:hover": {
+                transform: "scale(1.2)",
+              },
+              "&:hover:not(:hover)": {
+                transform: "scale(1)",
+              },
             }}
+          />
+          <Typography
+            variant="h2"
+            textAlign="center"
+            marginTop={3}
+            marginBottom={3}
           >
             {personaje.name}
           </Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
-          <Typography variant="h5">Status: {personaje.status}</Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-end">
-          <Typography variant="h5">Species: {personaje.species}</Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
-          <Typography variant="h5">
-            Type: {personaje.type === "" ? "unknown" : personaje.type}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-end">
-          <Typography variant="h5">Gender: {personaje.gender}</Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
-          <Typography variant="h5">Origin: {personaje.origin?.name}</Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-end">
-          <Typography variant="h5">
-            Location: {personaje.location?.name}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-start">
-          <Typography variant="h5">
-            Episodes: {personaje.episode?.length}
-          </Typography>
-        </Grid>
-        <Grid item xs={6} display="flex" justifyContent="flex-end">
-          <Accordion
-            sx={{
-              width: "50%",
-              backgroundColor: "#3c3e44",
-              color: "white",
-              borderRadius: "10px",
-            }}
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width="90%"
+            marginTop={4}
           >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{ boxShadow: "0px 0px 30px 0px rgba(0,0,0,0.25)" }}
-            >
-              <Typography>Select an episode</Typography>
-            </AccordionSummary>
-            <List
-              sx={{
-                width: "100%",
-                maxHeight: "150px",
-                overflow: "auto",
-                "&::-webkit-scrollbar": {
-                  width: "0.4em",
-                },
-              }}
-            >
-              {personaje.episode?.map((episodio) => (
-                <ListItem
-                  key={episodio.split("/").pop()}
-                  onClick={() => {
-                    window.open(episodio, "_blank");
-                  }}
-                >
-                  <ListItemText
-                    sx={{
-                      cursor: "pointer",
-                      "&:hover": {
-                        color: "green",
-                      },
-                    }}
-                    primary={`Episode ${episodio.split("/").pop()}`}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Accordion>
-        </Grid>
-      </>
-    );
-  };
-
-  return (
-    <Grid
-      container
-      spacing={2}
-      paddingTop={12}
-      justifyContent="center"
-      sx={{ height: "100vh" }}
-    >
-      <Grid
-        item
-        key={id}
-        sx={{
-          backgroundColor: "#3c3e44",
-          color: "white",
-          borderRadius: "10px",
-          height: "95%",
-          width: "60%",
-          boxShadow: "0px 0px 30px 0px rgba(0,0,0,0.75)",
-        }}
-      >
-        <IconButton
-          sx={{ position: "absolute", top: "10px", left: "10px" }}
-          onClick={handleGoBack}
-        >
-          <ArrowBackIcon sx={{ color: "white", fontSize: "50px" }} />
-        </IconButton>
-
-        <CardMedia
-          component="img"
-          sx={{
-            position: "relative",
-            height: "150px",
-            width: "150px",
-            margin: "auto",
-            marginTop: "-75px",
-            borderRadius: "50%",
-            outline: "none",
-            transition: "transform 0.5s ease",
-            "&:hover": {
-              transform: "scale(1.2)",
-            },
-            "&:hover:not(:hover)": {
-              transform: "scale(1)",
-            },
-          }}
-          image={personaje.image}
-          title={personaje.name}
-        />
-        {loading ? (
-          <Grid
-            item
-            container
-            justifyContent="center"
-            alignItems="center"
-            height="100%"
+            <Typography variant="h5">Status: {personaje.status}</Typography>
+            <Typography variant="h5">Specie: {personaje.species}</Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width="90%"
+            marginTop={4}
           >
-            <CircularProgress color="success" />
-          </Grid>
-        ) : (
-          <Grid item container spacing={2} padding={4} display="flex">
-            <PersonajeInfo />
-          </Grid>
-        )}
-      </Grid>
-    </Grid>
+            <Typography variant="h5">
+              Type: {personaje.type === "" ? "unknown" : personaje.type}
+            </Typography>
+            <Typography variant="h5">Gender: {personaje.gender}</Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width="90%"
+            marginTop={4}
+          >
+            <Typography variant="h5">
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href =
+                    "https://rickandmortyapi.com/api/location/?name=" +
+                    personaje.origin.name;
+                }}
+              >
+                Origin: {personaje.origin.name}
+              </Link>
+            </Typography>
+            <Typography variant="h5">
+              N° of episodes: {personaje.episode?.length}
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width="90%"
+            marginTop={4}
+            marginBottom={2}
+          >
+            <Typography variant="h5">
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href =
+                    "https://rickandmortyapi.com/api/location/?name=" +
+                    personaje.location.name;
+                }}
+              >
+                Location: {personaje.location.name}
+              </Link>
+            </Typography>
+            <Typography variant="h5">
+              <Link
+                underline="hover"
+                component="button"
+                color="darkseagreen"
+                onClick={() => {
+                  window.location.href = "/episodios";
+                }}
+              >
+                Episodes
+              </Link>
+            </Typography>
+          </Box>
+        </Box>
+      )}
+    </Box>
   );
 };
 
-export default Personaje;
+export default Personaje2;
