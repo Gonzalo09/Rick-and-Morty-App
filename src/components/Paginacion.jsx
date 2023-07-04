@@ -6,27 +6,27 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import LastPageIcon from "@mui/icons-material/LastPage";
 
 const Paginacion = (props) => {
-  const { info, setUrl, setPagina } = props;
+  const { path, info, url, setUrl, setPagina } = props;
   const navigate = useNavigate();
   const paginaActual = info?.prev ? parseInt(info.prev.split("=")[1]) + 1 : 1;
 
   const handleFirstPage = () => {
-    setUrl("https://rickandmortyapi.com/api/character?page=1");
+    setUrl(`${url}?page=${1}`);
     setPagina(1);
-    navigate("/personajes/pagina/1");
+    navigate(`/${path}/pagina/1`);
   };
 
   const handleLastPage = () => {
-    setUrl(`https://rickandmortyapi.com/api/character?page=${info.pages}`);
+    setUrl(`${url}?page=${info.pages}`);
     setPagina(info.pages);
-    navigate(`/personajes/pagina/${info.pages}`);
+    navigate(`/${path}/pagina/${info.pages}`);
   };
 
   const handlePreviousPage = () => {
     if (info?.prev) {
       setUrl(info.prev);
       setPagina(paginaActual - 1);
-      navigate(`/personajes/pagina/${paginaActual - 1}`);
+      navigate(`/${path}/pagina/${paginaActual - 1}`);
     }
   };
 
@@ -34,7 +34,7 @@ const Paginacion = (props) => {
     if (info?.next) {
       setUrl(info.next);
       setPagina(paginaActual + 1);
-      navigate(`/personajes/pagina/${paginaActual + 1}`);
+      navigate(`/${path}/pagina/${paginaActual + 1}`);
     }
   };
 

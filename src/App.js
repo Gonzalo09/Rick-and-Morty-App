@@ -54,7 +54,21 @@ function App() {
         path="/ubicaciones"
         element={<Ubicaciones ubicaciones={ubicaciones} />}
       />
-      <Route path="/episodios" element={<Episodios episodios={episodios} />} />
+      <Route
+        path="/episodios/pagina/:id"
+        element={
+          <Episodios
+            episodios={episodios}
+            setEpisodios={setEpisodios}
+            pagina={pagina}
+            setPagina={setPagina}
+            setInfo={setInfo}
+            info={info}
+            url={EPISODIOS_API}
+            setUrl={setUrl}
+          />
+        }
+      />
       <Route
         path="/personaje/:id"
         element={<Personaje url={PERSONAJES_API} />}

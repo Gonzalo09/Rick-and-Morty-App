@@ -17,12 +17,7 @@ const Inicio = (props) => {
   }, []);
 
   return (
-    <Grid
-      container
-      spacing={2}
-      paddingBottom={4}
-      sx={{ backgroundColor: "#282c34" }}
-    >
+    <Grid container spacing={2} sx={{ height: "100vh" }}>
       {loading ? (
         <Grid
           item
@@ -58,6 +53,7 @@ const Inicio = (props) => {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
+            paddingBottom={2}
           >
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={{ xs: 2, sm: 4 }}>
@@ -104,7 +100,7 @@ const Inicio = (props) => {
                 >
                   <Button
                     component={Link}
-                    to="/episodios"
+                    to={`/episodios/pagina/${pagina}`}
                     variant="contained"
                     color="success"
                     sx={{ minWidth: "130px", width: "90%" }}

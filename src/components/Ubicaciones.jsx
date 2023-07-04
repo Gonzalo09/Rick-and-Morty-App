@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import { Divider } from "@mui/material";
 
 const Ubicaciones = ({ ubicaciones }) => {
+  useEffect(() => {
+    document.title = "Rick and Morty - Locations";
+  }, []);
   return (
     <>
-      <Header titulo="Ubicaciones" />
+      <Header titulo="Locations" />
       <div style={{ padding: 10 }}>
         <div>
           {ubicaciones.map((ubicacion) => (

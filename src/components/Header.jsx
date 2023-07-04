@@ -19,8 +19,8 @@ const Header = (props) => {
     if (ruta.includes("/ubicaciones")) {
       window.history.back();
     }
-    if (ruta.includes("/episodios")) {
-      window.history.back();
+    if (ruta.includes("/episodios/pagina/")) {
+      window.location.href = "/";
     }
   };
 

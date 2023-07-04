@@ -56,15 +56,28 @@ const Personajes = (props) => {
     setPagina(1);
   };
 
+  useEffect(() => {
+    document.title = "Rick and Morty - Characters";
+  }, []);
+
   return (
     <Box>
       <Header titulo="Characters" />
-      <Paginacion info={info} setUrl={setUrl} setPagina={setPagina} />
+      <Paginacion
+        path={"personajes"}
+        info={info}
+        url={url}
+        setUrl={setUrl}
+        setPagina={setPagina}
+      />
       <PersonajesFiltros
         setNombre={setNombre}
         setStatus={setStatus}
+        status={status}
         setGender={setGender}
+        gender={gender}
         setSpecies={setSpecies}
+        species={species}
         handleSearch={handleSearch}
       />
       {personajes && personajes.length > 0 ? (
