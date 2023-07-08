@@ -154,6 +154,7 @@ const CardPersonajes = (props) => {
                   <CardContent>
                     <Typography
                       variant="h6"
+                      component="div"
                       sx={{
                         "@media (max-width: 450px)": {
                           fontSize: "1.1rem",
@@ -166,6 +167,7 @@ const CardPersonajes = (props) => {
                     {handleSpecies(personaje.species)}
                   </CardContent>
                 </Grid>
+
                 <Grid item>
                   <CardContent>
                     <Button

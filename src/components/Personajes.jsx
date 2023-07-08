@@ -4,6 +4,7 @@ import CardPersonajes from "./CardPersonajes";
 import Paginacion from "./Paginacion";
 import { useEffect, useState } from "react";
 import PersonajesFiltros from "./PersonajesFiltros";
+import VolverArriba from "./VolverArriba";
 
 const Personajes = (props) => {
   const {
@@ -92,6 +93,8 @@ const Personajes = (props) => {
           No characters found
         </Typography>
       )}
+
+      <VolverArriba />
     </Box>
   );
 };

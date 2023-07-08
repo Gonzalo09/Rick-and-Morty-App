@@ -83,7 +83,7 @@ const Inicio = (props) => {
                 >
                   <Button
                     component={Link}
-                    to="/ubicaciones"
+                    to={`/ubicaciones/pagina/${pagina}`}
                     variant="contained"
                     color="success"
                     sx={{ minWidth: "130px", width: "90%" }}

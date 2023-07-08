@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 import Paginacion from "./Paginacion";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import VolverArriba from "./VolverArriba";
 
 const Episodios = (props) => {
   const {
@@ -46,60 +38,6 @@ const Episodios = (props) => {
     setUrl(`${url}?page=${pagina}`);
   }, [pagina, setInfo, url, setUrl, setEpisodios]);
 
-  const [personajeIndex, setPersonajeIndex] = useState([]);
-  const [personajeImagen, setPersonajeImagen] = useState([]);
-
-  useEffect(() => {
-    const obtenerPersonajesImagenes = async () => {
-      const personajesImagenes = await Promise.all(
-        episodios.map(async (episodio) => {
-          const response = await fetch(episodio.characters[0]);
-          const data = await response.json();
-          return data.image;
-        })
-      );
-      setPersonajeIndex(episodios.map(() => 0));
-      setPersonajeImagen(personajesImagenes);
-    };
-
-    obtenerPersonajesImagenes();
-  }, [episodios]);
-
-  const handlePersonajeAnterior = (index) => {
-    if (personajeIndex[index] > 0) {
-      const newPersonajeIndex = [...personajeIndex];
-      newPersonajeIndex[index] = personajeIndex[index] - 1;
-      setPersonajeIndex(newPersonajeIndex);
-    }
-  };
-
-  const handlePersonajeSiguiente = (index) => {
-    if (personajeIndex[index] < episodios[index].characters.length - 1) {
-      const newPersonajeIndex = [...personajeIndex];
-      newPersonajeIndex[index] = personajeIndex[index] + 1;
-      setPersonajeIndex(newPersonajeIndex);
-    }
-  };
-
-  useEffect(() => {
-    const obtenerPersonajeImagen = async (url) => {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data.image;
-    };
-
-    const actualizarPersonajeImagen = async () => {
-      const personajesImagenes = await Promise.all(
-        episodios.map((episodio, index) =>
-          obtenerPersonajeImagen(episodio.characters[personajeIndex[index]])
-        )
-      );
-      setPersonajeImagen(personajesImagenes);
-    };
-
-    actualizarPersonajeImagen();
-  }, [episodios, personajeIndex]);
-
   return (
     <>
       <Header titulo="Episodes" />
@@ -129,7 +67,6 @@ const Episodios = (props) => {
             <Card
               sx={{
                 height: "100%",
-                minHeight: 386,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-start",
@@ -141,55 +78,25 @@ const Episodios = (props) => {
             >
               <CardHeader
                 title={episodio.id}
+                subheader={`Season ${episodio.episode.substring(
+                  episodio.episode.indexOf("S") + 1,
+                  episodio.episode.indexOf("E")
+                )} - Episode ${episodio.episode.substring(
+                  episodio.episode.indexOf("E") + 1
+                )}`}
                 sx={{
                   backgroundColor: "#3c3e44",
                   color: "white",
-                  paddingBottom: 4,
                 }}
               />
-              <Grid
-                container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                sx={{
-                  width: "100%",
-                  paddingLeft: 2,
-                  paddingRight: 2,
-                }}
-              >
-                <NavigateBeforeIcon
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handlePersonajeAnterior(index)}
-                />
-                {personajeImagen[index] && (
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      width: 150,
-                      height: 150,
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                    }}
-                    image={personajeImagen[index]}
-                    alt={episodio.name}
-                  />
-                )}
-                <NavigateNextIcon
-                  sx={{
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handlePersonajeSiguiente(index)}
-                />
-              </Grid>
               <CardContent>
                 <Typography variant="h5">{episodio.name}</Typography>
                 <br />
-                <Typography>Air date: {episodio.air_date}</Typography>
-                <Typography>
-                  Characters: {personajeIndex[index] + 1} of{" "}
+                <Typography variant="body1">
+                  Air date: {episodio.air_date}
+                </Typography>
+                <Typography variant="body1">
+                  Characters: {episodio.characters.length === 0 ? "None" : ""}
                   {episodio.characters.length}
                 </Typography>
               </CardContent>
@@ -197,6 +104,7 @@ const Episodios = (props) => {
           </Grid>
         ))}
       </Grid>
+      <VolverArriba />
     </>
   );
 };

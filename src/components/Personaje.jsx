@@ -12,11 +12,11 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const Personaje2 = (props) => {
+const Personaje = (props) => {
   const { url } = props;
   const { id } = useParams();
   const [personaje, setPersonaje] = useState({});
@@ -319,6 +319,7 @@ const Personaje2 = (props) => {
                     id="scroll-dialog-description"
                     ref={descriptionElementRef}
                     tabIndex={-1}
+                    component="div"
                     sx={{
                       "@media (max-width: 600px)": {
                         fontSize: "12px",
@@ -327,7 +328,7 @@ const Personaje2 = (props) => {
                   >
                     {episodes.map((episode) => {
                       return (
-                        <>
+                        <Fragment key={episode.id}>
                           <Box
                             key={episode.id}
                             display="flex"
@@ -377,7 +378,7 @@ const Personaje2 = (props) => {
                               },
                             }}
                           />
-                        </>
+                        </Fragment>
                       );
                     })}
                   </DialogContentText>
@@ -394,4 +395,4 @@ const Personaje2 = (props) => {
   );
 };
 
-export default Personaje2;
+export default Personaje;

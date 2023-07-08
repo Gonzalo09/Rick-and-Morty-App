@@ -88,8 +88,9 @@ const PersonajesFiltros = (props) => {
               ml: "12px",
             }}
             title="Clear status"
+            onClick={() => setStatus("")}
           >
-            <ClearRoundedIcon color="primary" onClick={() => setStatus("")} />
+            <ClearRoundedIcon color="primary" />
           </IconButton>
         )}
       </Grid>
@@ -136,8 +137,9 @@ const PersonajesFiltros = (props) => {
               ml: "12px",
             }}
             title="Clear gender"
+            onClick={() => setGender("")}
           >
-            <ClearRoundedIcon color="primary" onClick={() => setGender("")} />
+            <ClearRoundedIcon color="primary" />
           </IconButton>
         )}
       </Grid>
@@ -192,8 +194,9 @@ const PersonajesFiltros = (props) => {
               ml: "12px",
             }}
             title="Clear species"
+            onClick={() => setSpecies("")}
           >
-            <ClearRoundedIcon color="primary" onClick={() => setSpecies("")} />
+            <ClearRoundedIcon color="primary" />
           </IconButton>
         )}
       </Grid>
