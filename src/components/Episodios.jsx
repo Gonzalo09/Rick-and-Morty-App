@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import Header from "./Header";
-import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import Paginacion from "./Paginacion";
 import VolverArriba from "./VolverArriba";
 
@@ -38,6 +45,21 @@ const Episodios = (props) => {
     setUrl(`${url}?page=${pagina}`);
   }, [pagina, setInfo, url, setUrl, setEpisodios]);
 
+  if (episodios.length === 0) {
+    return (
+      <Grid
+        item
+        xs={12}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress color="success" />
+      </Grid>
+    );
+  }
+
   return (
     <>
       <Header titulo="Episodes" />
@@ -69,7 +91,7 @@ const Episodios = (props) => {
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "flex-start",
+                justifyContent: "space-between",
                 alignItems: "center",
                 textAlign: "center",
                 backgroundColor: "#3c3e44",
@@ -87,11 +109,30 @@ const Episodios = (props) => {
                 sx={{
                   backgroundColor: "#3c3e44",
                   color: "white",
+                  // title
+                  "& .MuiCardHeader-title": {
+                    fontWeight: "bold",
+                    color: "#12B0C9",
+                    opacity: "0.8",
+                    textShadow: "1px 1px 1px black",
+                    fontSize: "1.8rem",
+                  },
                 }}
               />
               <CardContent>
-                <Typography variant="h5">{episodio.name}</Typography>
-                <br />
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#ffffff",
+                    textShadow: "1px 1px 1px black",
+                    opacity: "0.8",
+                  }}
+                >
+                  {episodio.name}
+                </Typography>
+              </CardContent>
+              <CardContent>
                 <Typography variant="body1">
                   Air date: {episodio.air_date}
                 </Typography>

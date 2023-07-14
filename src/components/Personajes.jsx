@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress, Grid } from "@mui/material";
 import CardPersonajes from "./CardPersonajes";
 import Paginacion from "./Paginacion";
 import { useEffect, useState } from "react";

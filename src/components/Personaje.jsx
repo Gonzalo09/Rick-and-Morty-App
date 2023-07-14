@@ -102,8 +102,7 @@ const Personaje = (props) => {
           width="80%"
           margin="auto"
           marginTop={12}
-          marginBottom={10}
-          paddingBottom={5}
+          paddingBottom={3}
           color="white"
           sx={{
             backgroundColor: "#3c3e44",
@@ -141,11 +140,15 @@ const Personaje = (props) => {
             }}
           />
           <Typography
-            variant="h2"
+            variant={personaje.name.length > 34 ? "h3" : "h2"}
             textAlign="center"
             marginTop={3}
             marginBottom={3}
             sx={{
+              color: "#12B0C9",
+              fontWeight: "bold",
+              opacity: "0.7",
+              width: "90%",
               "@media (max-width: 600px)": {
                 fontSize: "40px",
               },
@@ -171,11 +174,24 @@ const Personaje = (props) => {
                 "@media (max-width: 600px)": {
                   marginBottom: "10px",
                 },
+                textAlign: "center",
               }}
             >
-              Status: {personaje.status}
+              Status:{" "}
+              {personaje.status === "unknown" ? "Unknown" : personaje.status}
             </Typography>
-            <Typography variant="h5">Specie: {personaje.species}</Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                "@media (max-width: 600px)": {
+                  marginBottom: "10px",
+                },
+                textAlign: "center",
+              }}
+            >
+              Specie:{" "}
+              {personaje.species === "unknown" ? "Unknown" : personaje.species}
+            </Typography>
           </Box>
           <Box
             display="flex"
@@ -195,11 +211,23 @@ const Personaje = (props) => {
                 "@media (max-width: 600px)": {
                   marginBottom: "10px",
                 },
+                textAlign: "center",
               }}
             >
-              Type: {personaje.type === "" ? "unknown" : personaje.type}
+              Type: {personaje.type === "" ? "Unknown" : personaje.type}
             </Typography>
-            <Typography variant="h5">Gender: {personaje.gender}</Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                "@media (max-width: 600px)": {
+                  marginBottom: "10px",
+                },
+                textAlign: "center",
+              }}
+            >
+              Gender:{" "}
+              {personaje.gender === "unknown" ? "Unknown" : personaje.gender}
+            </Typography>
           </Box>
           <Box
             display="flex"
@@ -219,22 +247,24 @@ const Personaje = (props) => {
                 "@media (max-width: 600px)": {
                   marginBottom: "10px",
                 },
+                textAlign: "center",
               }}
             >
-              <Link
-                underline="hover"
-                component="button"
-                color="darkseagreen"
-                onClick={() => {
-                  window.location.href =
-                    "https://rickandmortyapi.com/api/location/?name=" +
-                    personaje.origin.name;
-                }}
-              >
-                Origin: {personaje.origin.name}
-              </Link>
+              Origin:{" "}
+              {personaje.origin.name === "" ||
+              personaje.origin.name === "unknown"
+                ? "Unknown"
+                : personaje.origin.name}
             </Typography>
-            <Typography variant="h5">
+            <Typography
+              variant="h5"
+              sx={{
+                "@media (max-width: 600px)": {
+                  marginBottom: "10px",
+                },
+                textAlign: "center",
+              }}
+            >
               N° of episodes: {personaje.episode?.length}
             </Typography>
           </Box>
@@ -257,20 +287,10 @@ const Personaje = (props) => {
                 "@media (max-width: 600px)": {
                   marginBottom: "10px",
                 },
+                textAlign: "center",
               }}
             >
-              <Link
-                underline="hover"
-                component="button"
-                color="darkseagreen"
-                onClick={() => {
-                  window.location.href =
-                    "https://rickandmortyapi.com/api/location/?name=" +
-                    personaje.location.name;
-                }}
-              >
-                Location: {personaje.location.name}
-              </Link>
+              Location: {personaje.location.name}
             </Typography>
             <Typography
               variant="h5"
@@ -278,6 +298,7 @@ const Personaje = (props) => {
                 "@media (max-width: 600px)": {
                   marginBottom: "10px",
                 },
+                textAlign: "center",
               }}
             >
               <Link

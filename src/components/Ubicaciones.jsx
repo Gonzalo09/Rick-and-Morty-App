@@ -8,6 +8,7 @@ import {
   Grid,
   IconButton,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 import Paginacion from "./Paginacion";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -99,6 +100,21 @@ const Ubicaciones = (props) => {
       return newPersonajeIndex;
     });
   };
+
+  if (personajeImagen.length === 0 && personajeIndex.length === 0) {
+    return (
+      <Grid
+        item
+        xs={12}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress color="success" />
+      </Grid>
+    );
+  }
 
   return (
     <>
