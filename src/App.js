@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Personajes from "./components/Personajes";
-import Ubicaciones from "./components/Ubicaciones";
-import Episodios from "./components/Episodios";
-import Inicio from "./components/Inicio";
+import Personajes from "./components/Personajes/Personajes";
+import Ubicaciones from "./components/Ubicaciones/Ubicaciones";
+import Episodios from "./components/Episodios/Episodios";
+import Inicio from "./components/Inicio/Inicio";
 import { Route, Routes } from "react-router-dom";
-import Personaje from "./components/Personaje";
+import Personaje from "./components/Personajes/Personaje";
 
 const PERSONAJES_API = "https://rickandmortyapi.com/api/character";
 const UBICACIONES_API = "https://rickandmortyapi.com/api/location";

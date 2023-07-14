@@ -1,8 +1,8 @@
 import { Typography, Button, AppBar, Box, Toolbar } from "@mui/material";
 import React from "react";
-import "../fonts.css";
+import "../../fonts.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import imagen from "../image/RickAndMortyHeader.png";
+import imagen from "../../image/RickAndMortyHeader.png";
 import { Link } from "react-router-dom";
 
 const Header = (props) => {

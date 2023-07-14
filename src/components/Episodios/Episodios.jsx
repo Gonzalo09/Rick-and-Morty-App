@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Header from "./Header";
+import Header from "../Header/Header";
 import {
   Card,
   CardContent,
@@ -8,8 +8,8 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
-import Paginacion from "./Paginacion";
-import VolverArriba from "./VolverArriba";
+import Paginacion from "../Paginacion/Paginacion";
+import VolverArriba from "../Boton/VolverArriba";
 
 const Episodios = (props) => {
   const {

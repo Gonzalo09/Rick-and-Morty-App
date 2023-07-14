@@ -1,10 +1,10 @@
-import Header from "./Header";
+import Header from "../Header/Header";
 import { Box, Typography } from "@mui/material";
 import CardPersonajes from "./CardPersonajes";
-import Paginacion from "./Paginacion";
+import Paginacion from "../Paginacion/Paginacion";
 import { useEffect, useState } from "react";
 import PersonajesFiltros from "./PersonajesFiltros";
-import VolverArriba from "./VolverArriba";
+import VolverArriba from "../Boton/VolverArriba";
 
 const Personajes = (props) => {
   const {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import Header from "../Header/Header";
 import {
   Card,
   CardContent,
@@ -10,11 +10,11 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
-import Paginacion from "./Paginacion";
+import Paginacion from "../Paginacion/Paginacion";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import notFound from "../image/not-found.png";
-import VolverArriba from "./VolverArriba";
+import notFound from "../../image/not-found.png";
+import VolverArriba from "../Boton/VolverArriba";
 
 const Ubicaciones = (props) => {
   const {

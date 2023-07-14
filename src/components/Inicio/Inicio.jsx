@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { Box, Grid, CircularProgress } from "@mui/material";
-import RickAndMorty from "../image/RickAndMortyInicio.png";
+import RickAndMorty from "../../image/RickAndMortyInicio.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
