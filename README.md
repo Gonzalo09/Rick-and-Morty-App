@@ -4,7 +4,7 @@
 
 Rick and Morty App es una aplicación web que permite visualizar información sobre la serie animada Rick and Morty. La aplicación fue desarrollada utilizando React y Material-UI.
 
-![Captura de pantalla de la aplicación](ejemploInicio.png)
+![Inicio](./src/image/ejemploInicio.png)
 
 ## Demo
 
