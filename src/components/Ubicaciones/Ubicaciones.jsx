@@ -55,27 +55,23 @@ const Ubicaciones = (props) => {
 
   useEffect(() => {
     const obtenerPersonajesImagenes = async () => {
-      const personajesImagenes = await Promise.all(
-        ubicaciones.map(async (ubicacion) => {
-          if (ubicacion.residents.length > 0) {
-            const personajes = await Promise.all(
-              ubicacion.residents.map(async (residente) => {
-                const response = await fetch(residente);
-                const data = await response.json();
-                return {
-                  name: data.name,
-                  image: data.image,
-                };
-              })
-            );
-            return personajes;
-          } else {
-            return [];
+      const personajesImagenes = [];
+      const personajesIndex = [];
+      for (let i = 0; i < ubicaciones.length; i++) {
+        personajesImagenes.push([]);
+        personajesIndex.push(0);
+        for (let j = 0; j < ubicaciones[i].residents.length; j++) {
+          try {
+            const response = await fetch(ubicaciones[i].residents[j]);
+            const data = await response.json();
+            personajesImagenes[i].push(data);
+          } catch (error) {
+            console.error("Error fetching data:", error);
           }
-        })
-      );
+        }
+      }
       setPersonajeImagen(personajesImagenes);
-      setPersonajeIndex(personajesImagenes.map(() => 0));
+      setPersonajeIndex(personajesIndex);
     };
     obtenerPersonajesImagenes();
   }, [ubicaciones]);
@@ -100,21 +96,6 @@ const Ubicaciones = (props) => {
       return newPersonajeIndex;
     });
   };
-
-  if (personajeImagen.length === 0 && personajeIndex.length === 0) {
-    return (
-      <Grid
-        item
-        xs={12}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <CircularProgress color="success" />
-      </Grid>
-    );
-  }
 
   return (
     <>
@@ -190,6 +171,21 @@ const Ubicaciones = (props) => {
                 >
                   <NavigateBeforeIcon />
                 </IconButton>
+
+                {personajeImagen.length === 0 && ubicaciones.length > 0 ? (
+                  <CircularProgress
+                    color="success"
+                    sx={{
+                      width: 140,
+                      height: 140,
+                      borderRadius: "50%",
+                      marginBottom: -1,
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
+
                 {personajeImagen[index] && (
                   <CardMedia
                     component="img"
@@ -232,11 +228,21 @@ const Ubicaciones = (props) => {
               <CardContent>
                 <Typography>
                   {ubicacion.residents.length > 0
-                    ? `${personajeIndex[index] + 1} / ${
-                        ubicacion.residents.length
-                      }`
+                    ? isNaN(personajeIndex[index])
+                      ? "Loading..." // or any other loading message
+                      : `${personajeIndex[index] + 1} / ${
+                          ubicacion.residents.length
+                        }`
                     : "0 / 0"}
                 </Typography>
+                <Typography>
+                  {ubicacion.residents.length > 0 &&
+                  personajeImagen[index] &&
+                  personajeImagen[index][personajeIndex[index]]
+                    ? personajeImagen[index][personajeIndex[index]].name
+                    : "Not Found"}
+                </Typography>
+
                 <Typography
                   sx={{
                     paddingTop: 2,
