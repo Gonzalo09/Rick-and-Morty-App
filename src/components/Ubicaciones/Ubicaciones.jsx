@@ -57,22 +57,30 @@ const Ubicaciones = (props) => {
     const obtenerPersonajesImagenes = async () => {
       const personajesImagenes = [];
       const personajesIndex = [];
-      for (let i = 0; i < ubicaciones.length; i++) {
-        personajesImagenes.push([]);
-        personajesIndex.push(0);
-        for (let j = 0; j < ubicaciones[i].residents.length; j++) {
-          try {
-            const response = await fetch(ubicaciones[i].residents[j]);
-            const data = await response.json();
-            personajesImagenes[i].push(data);
-          } catch (error) {
-            console.error("Error fetching data:", error);
-          }
-        }
-      }
+
+      await Promise.all(
+        ubicaciones.map(async (ubicacion, i) => {
+          personajesImagenes.push([]);
+          personajesIndex.push(0);
+
+          await Promise.all(
+            ubicacion.residents.map(async (resident) => {
+              try {
+                const response = await fetch(resident);
+                const data = await response.json();
+                personajesImagenes[i].push(data);
+              } catch (error) {
+                console.error("Error fetching data:", error);
+              }
+            })
+          );
+        })
+      );
+
       setPersonajeImagen(personajesImagenes);
       setPersonajeIndex(personajesIndex);
     };
+
     obtenerPersonajesImagenes();
   }, [ubicaciones]);
 
